@@ -1,0 +1,27 @@
+# Robots.txt for ao-jewelry-demo
+# This file prevents search engines from indexing this demo site
+
+User-agent: *
+Disallow: /
+
+# Block all crawlers
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+# Sitemap (none provided as we don't want indexing)
+# Sitemap: 

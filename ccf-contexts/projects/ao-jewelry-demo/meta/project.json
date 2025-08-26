@@ -1,0 +1,18 @@
+{
+  "project_name": "ao-jewelry-demo",
+  "description": "E-commerce jewelry shop demo site with responsive design and shopping cart functionality",
+  "tech_stack": {
+    "frontend": ["HTML5", "CSS3", "JavaScript (Vanilla)"],
+    "styling": ["Responsive Design", "CSS Grid", "Flexbox"],
+    "features": ["Shopping Cart", "Product Gallery", "Contact Form", "Responsive Navigation"]
+  },
+  "github": {
+    "repository": "https://github.com/ryojiwata0103/ao-jewelry-demo",
+    "pages_url": "https://ryojiwata0103.github.io/ao-jewelry-demo/",
+    "visibility": "public",
+    "branch": "main"
+  },
+  "created_at": "2025-08-26",
+  "last_active": "2025-08-26",
+  "sessions": 1
+}
