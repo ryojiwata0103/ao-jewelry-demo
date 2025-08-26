@@ -1,0 +1,17 @@
+{
+  "projects": [
+    {
+      "id": "ao-jewelry-demo",
+      "name": "ao Jewelry ECデモサイト",
+      "status": "completed",
+      "created": "2025-01-25",
+      "last_active": "2025-01-25",
+      "type": "web-demo",
+      "priority": "high",
+      "client": "ao jewelry",
+      "path": "/home/general/ao-jewelry-demo/"
+    }
+  ],
+  "last_updated": "2025-01-25",
+  "total_projects": 1
+}

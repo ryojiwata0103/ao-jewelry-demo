@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>まどろみなアメジストエレスチャルクォーツ - ao jewelry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* 商品詳細ページ専用スタイル */
+        .product-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--white), var(--secondary-beige));
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .product-gallery {
+            position: sticky;
+            top: 120px;
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 20px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            padding-top: 20px;
+        }
+
+        .product-title {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+        }
+
+        .product-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            letter-spacing: 0.05em;
+        }
+
+        .product-price {
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-bottom: 40px;
+        }
+
+        .product-story {
+            margin-bottom: 40px;
+        }
+
+        .product-story h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            letter-spacing: 0.05em;
+        }
+
+        .product-story p {
+            font-size: 16px;
+            line-height: 2;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .product-specs {
+            background: rgba(14, 165, 233, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-specs h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            letter-spacing: 0.05em;
+        }
+
+        .spec-list {
+            list-style: none;
+        }
+
+        .spec-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+            font-size: 14px;
+        }
+
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .spec-value {
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .inquiry-button {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 30px;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .inquiry-button:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+        }
+
+        .wishlist-button {
+            padding: 15px 20px;
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .breadcrumb {
+            padding: 80px 0 20px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-blue);
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .product-gallery {
+                position: static;
+            }
+
+            .product-title {
+                font-size: 28px;
+            }
+
+            .product-price {
+                font-size: 24px;
+            }
+
+            .thumbnail-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .inquiry-button {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo/ao-logo.png" alt="ao">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#concept">Concept</a></li>
+                <li><a href="../index.html#collection">Collection</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- パンくずリスト -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span>></span>
+            <a href="../index.html#collection">Collection</a>
+            <span>></span>
+            <span>まどろみなアメジストエレスチャルクォーツ</span>
+        </div>
+    </div>
+
+    <!-- 商品詳細 -->
+    <section class="product-hero">
+        <div class="product-container">
+            <!-- 商品画像ギャラリー -->
+            <div class="product-gallery">
+                <img id="mainImage" src="../images/products/2/1.webp" alt="まどろみなアメジストエレスチャルクォーツ" class="main-image">
+                <div class="thumbnail-grid">
+                    <img src="../images/products/2/1.webp" alt="まどろみなアメジストエレスチャルクォーツ" class="thumbnail active" onclick="changeMainImage(this)">
+                    <img src="../images/products/2/2.webp" alt="まどろみなアメジストエレスチャルクォーツ - 角度2" class="thumbnail" onclick="changeMainImage(this)">
+                    <img src="../images/products/2/3.webp" alt="まどろみなアメジストエレスチャルクォーツ - 角度3" class="thumbnail" onclick="changeMainImage(this)">
+                    <img src="../images/products/2/4.webp" alt="まどろみなアメジストエレスチャルクォーツ - 角度4" class="thumbnail" onclick="changeMainImage(this)">
+                </div>
+            </div>
+
+            <!-- 商品情報 -->
+            <div class="product-details">
+                <h1 class="product-title">まどろみなアメジスト<br>エレスチャルクォーツ</h1>
+                <p class="product-subtitle">夢と現実の境界に咲く、紫の結晶</p>
+                <div class="product-price">¥110,000</div>
+
+                <div class="product-story">
+                    <h3>物語</h3>
+                    <p>
+                        まどろみの中で見る夢のような美しさを持つ<br>
+                        エレスチャルクォーツとアメジストの調和。
+                    </p>
+                    <p>
+                        結晶の中に閉じ込められた古代の水や<br>
+                        微細な鉱物のインクルージョンが織りなす、<br>
+                        幻想的な世界をリングに込めました。
+                    </p>
+                    <p>
+                        紫の輝きは精神性を高め、<br>
+                        持つ人の直感力と洞察力を育みます。<br>
+                        瞑想や創作活動のお供としても最適な一品です。
+                    </p>
+                </div>
+
+                <div class="product-specs">
+                    <h4>商品詳細</h4>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">素材</span>
+                            <span class="spec-value">K18ホワイトゴールド</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">石</span>
+                            <span class="spec-value">アメジストエレスチャルクォーツ (約3.2ct)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">サイズ</span>
+                            <span class="spec-value">リング幅 約4mm</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">カラット</span>
+                            <span class="spec-value">3.2ct</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">カット</span>
+                            <span class="spec-value">オーバルカット</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">産地</span>
+                            <span class="spec-value">ブラジル産</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">特徴</span>
+                            <span class="spec-value">エレスチャル（骸骨水晶）の特殊構造</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">サイズ調整</span>
+                            <span class="spec-value">可能（+1号〜-1号まで）</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="product-actions">
+                    <button class="inquiry-button" onclick="inquireProduct()">
+                        お問い合わせ・購入相談
+                    </button>
+                    <button class="wishlist-button" onclick="addToWishlist()">
+                        ♡ お気に入り
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 関連商品セクション -->
+    <section class="collection-section">
+        <div class="container">
+            <h2 class="section-title">他の作品</h2>
+            <div class="product-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <article class="product-card">
+                    <a href="product-1.html">
+                        <div class="product-image">
+                            <img src="../images/products/1/1.webp" alt="地球なアクアマリン">
+                            <div class="product-overlay">
+                                <span class="view-more">詳細を見る</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">地球なアクアマリン</h3>
+                            <p class="product-price">¥87,000</p>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="product-card">
+                    <a href="product-3.html">
+                        <div class="product-image">
+                            <img src="../images/products/3/1.webp" alt="ロマンティックな人魚">
+                            <div class="product-overlay">
+                                <span class="view-more">詳細を見る</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">ロマンティックな人魚<br>アクアマリン＆モルガナイト</h3>
+                            <p class="product-price">¥68,000</p>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="product-card">
+                    <a href="product-4.html">
+                        <div class="product-image">
+                            <img src="../images/products/4/1.webp" alt="冴×シベリアンなバイカラータンザナイト">
+                            <div class="product-overlay">
+                                <span class="view-more">詳細を見る</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">冴×シベリアンな<br>バイカラータンザナイト</h3>
+                            <p class="product-price">¥72,000</p>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../images/logo/ao-logo.png" alt="ao">
+                </div>
+                <p class="footer-tagline">日常に詩的な輝きを</p>
+                <p class="copyright">&copy; 2024 ao jewelry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // 商品画像の切り替え
+        function changeMainImage(thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            mainImage.src = thumbnail.src;
+            mainImage.alt = thumbnail.alt;
+            
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+
+        // お問い合わせ機能
+        function inquireProduct() {
+            const subject = encodeURIComponent('まどろみなアメジストエレスチャルクォーツについてのお問い合わせ');
+            const body = encodeURIComponent(`商品名: まどろみなアメジストエレスチャルクォーツ
+価格: ¥110,000
+
+お問い合わせ内容をご記入ください：
+
+
+`);
+            window.location.href = `mailto:info@ao-jewelry.com?subject=${subject}&body=${body}`;
+        }
+
+        // お気に入り機能
+        function addToWishlist() {
+            alert('お気に入りに追加しました！\n※デモ版のため実際の機能ではありません');
+        }
+    </script>
+</body>
+</html>

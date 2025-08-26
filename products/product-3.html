@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ロマンティックな人魚 アクアマリン＆モルガナイト - ao jewelry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* 商品詳細ページ専用スタイル */
+        .product-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--white), var(--secondary-beige));
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .product-gallery {
+            position: sticky;
+            top: 120px;
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 20px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            padding-top: 20px;
+        }
+
+        .product-title {
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+        }
+
+        .product-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            letter-spacing: 0.05em;
+        }
+
+        .product-price {
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--accent-gold);
+            margin-bottom: 40px;
+        }
+
+        .product-story {
+            margin-bottom: 40px;
+        }
+
+        .product-story h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            letter-spacing: 0.05em;
+        }
+
+        .product-story p {
+            font-size: 16px;
+            line-height: 2;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .product-specs {
+            background: rgba(14, 165, 233, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-specs h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            letter-spacing: 0.05em;
+        }
+
+        .spec-list {
+            list-style: none;
+        }
+
+        .spec-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+            font-size: 14px;
+        }
+
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .spec-value {
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .inquiry-button {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 30px;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .inquiry-button:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+        }
+
+        .wishlist-button {
+            padding: 15px 20px;
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .breadcrumb {
+            padding: 80px 0 20px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-blue);
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .product-gallery {
+                position: static;
+            }
+
+            .product-title {
+                font-size: 28px;
+            }
+
+            .product-price {
+                font-size: 24px;
+            }
+
+            .thumbnail-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .inquiry-button {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo/ao-logo.png" alt="ao">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#concept">Concept</a></li>
+                <li><a href="../index.html#collection">Collection</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- パンくずリスト -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span>></span>
+            <a href="../index.html#collection">Collection</a>
+            <span>></span>
+            <span>ロマンティックな人魚</span>
+        </div>
+    </div>
+
+    <!-- 商品詳細 -->
+    <section class="product-hero">
+        <div class="product-container">
+            <!-- 商品画像ギャラリー -->
+            <div class="product-gallery">
+                <img id="mainImage" src="../images/products/3/1.webp" alt="ロマンティックな人魚" class="main-image">
+                <div class="thumbnail-grid">
+                    <img src="../images/products/3/1.webp" alt="ロマンティックな人魚" class="thumbnail active" onclick="changeMainImage(this)">
+                    <img src="../images/products/3/2.webp" alt="ロマンティックな人魚 - 角度2" class="thumbnail" onclick="changeMainImage(this)">
+                    <img src="../images/products/3/3.webp" alt="ロマンティックな人魚 - 角度3" class="thumbnail" onclick="changeMainImage(this)">
+                </div>
+            </div>
+
+            <!-- 商品情報 -->
+            <div class="product-details">
+                <h1 class="product-title">ロマンティックな人魚<br>アクアマリン＆モルガナイト＆ダイヤモンド</h1>
+                <p class="product-subtitle">海の歌声と恋の物語</p>
+                <div class="product-price">¥68,000</div>
+
+                <div class="product-story">
+                    <h3>物語</h3>
+                    <p>
+                        海の底で歌う人魚の美しい歌声に<br>
+                        恋をした船乗りの物語を込めたリング。
+                    </p>
+                    <p>
+                        アクアマリンの清らかな青と<br>
+                        モルガナイトの優しいピンクが織りなす<br>
+                        ロマンティックなハーモニー。
+                    </p>
+                    <p>
+                        ダイヤモンドの輝きが波間に踊る光を表現し、<br>
+                        永遠の愛と純粋な想いを象徴します。<br>
+                        愛する人への贈り物としても最適な一品。
+                    </p>
+                </div>
+
+                <div class="product-specs">
+                    <h4>商品詳細</h4>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">素材</span>
+                            <span class="spec-value">K18ホワイトゴールド / K18ローズゴールド</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">石</span>
+                            <span class="spec-value">アクアマリン、モルガナイト、ダイヤモンド</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">サイズ</span>
+                            <span class="spec-value">リング幅 約5mm</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">メイン石</span>
+                            <span class="spec-value">アクアマリン 1.8ct、モルガナイト 1.2ct</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">アクセント石</span>
+                            <span class="spec-value">ダイヤモンド 0.15ct</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">カット</span>
+                            <span class="spec-value">オーバルカット（アクア・モルガナイト）</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">産地</span>
+                            <span class="spec-value">ブラジル産（アクア・モルガナイト）</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">サイズ調整</span>
+                            <span class="spec-value">可能（+1号〜-1号まで）</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="product-actions">
+                    <button class="inquiry-button" onclick="inquireProduct()">
+                        お問い合わせ・購入相談
+                    </button>
+                    <button class="wishlist-button" onclick="addToWishlist()">
+                        ♡ お気に入り
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 関連商品セクション -->
+    <section class="collection-section">
+        <div class="container">
+            <h2 class="section-title">他の作品</h2>
+            <div class="product-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <article class="product-card">
+                    <a href="product-1.html">
+                        <div class="product-image">
+                            <img src="../images/products/1/1.webp" alt="地球なアクアマリン">
+                            <div class="product-overlay">
+                                <span class="view-more">詳細を見る</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">地球なアクアマリン</h3>
+                            <p class="product-price">¥87,000</p>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="product-card">
+                    <a href="product-2.html">
+                        <div class="product-image">
+                            <img src="../images/products/2/1.webp" alt="まどろみなアメジストエレスチャルクォーツ">
+                            <div class="product-overlay">
+                                <span class="view-more">詳細を見る</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">まどろみなアメジスト<br>エレスチャルクォーツ</h3>
+                            <p class="product-price">¥110,000</p>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="product-card">
+                    <a href="product-4.html">
+                        <div class="product-image">
+                            <img src="../images/products/4/1.webp" alt="冴×シベリアンなバイカラータンザナイト">
+                            <div class="product-overlay">
+                                <span class="view-more">詳細を見る</span>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">冴×シベリアンな<br>バイカラータンザナイト</h3>
+                            <p class="product-price">¥72,000</p>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../images/logo/ao-logo.png" alt="ao">
+                </div>
+                <p class="footer-tagline">日常に詩的な輝きを</p>
+                <p class="copyright">&copy; 2024 ao jewelry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // 商品画像の切り替え
+        function changeMainImage(thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            mainImage.src = thumbnail.src;
+            mainImage.alt = thumbnail.alt;
+            
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+
+        // お問い合わせ機能
+        function inquireProduct() {
+            const subject = encodeURIComponent('ロマンティックな人魚 アクアマリン＆モルガナイトについてのお問い合わせ');
+            const body = encodeURIComponent(`商品名: ロマンティックな人魚 アクアマリン＆モルガナイト＆ダイヤモンド
+価格: ¥68,000
+
+お問い合わせ内容をご記入ください：
+
+
+`);
+            window.location.href = `mailto:info@ao-jewelry.com?subject=${subject}&body=${body}`;
+        }
+
+        // お気に入り機能
+        function addToWishlist() {
+            alert('お気に入りに追加しました！\n※デモ版のため実際の機能ではありません');
+        }
+    </script>
+</body>
+</html>
